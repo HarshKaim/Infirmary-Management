@@ -1,0 +1,547 @@
+//A project on hospital management
+#include<fstream>
+#include<conio.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<iostream>
+using namespace std;
+int temp;
+class doctor
+{
+ char name[30],fname[30],degree[5];
+ int id;
+ public:
+ void dgetdata(); //get details of a doctor
+ void ddisplaydata(); //display details of a doctor
+ void dmodify(); //modify details of a doctor
+ int retid(); //return Id number of a doctor
+}d;
+class patient
+{
+ char pname[30],problem[30],dept[30];
+ long int phno,reg_no;
+ int fee;
+ public:
+ void pgetdata(); //get details of a patient
+ void pdisplaydata(); //display details of a patient
+ void pmodify(); //modify details of a patient
+ long int retreg_no(); //return registration number
+}p;
+void suboptions();
+void add();
+void search();
+void modify();
+void Delete();
+void bedx();
+void bedy();
+void bedz();
+void count();
+void fee();
+void doctor::dgetdata()
+{
+ cout<<"\n\t\t\t\tEnter name of doctor:";
+ gets(name);
+ cout<<"\n\t\t\t\tEnter father's name of doctor:";
+ gets(fname);
+ cout<<"\n\t\t\t\tEnter degree of doctor:";
+ gets(degree);
+ cout<<"\n\t\t\t\tEnter doctor Id number:";
+ cin>>id;
+}
+void doctor::ddisplaydata()
+{
+ cout<<"\n\t\t\t\tName:"<<name<<"\n\t\t\t\tFather's name:"<<fname;
+ cout<<"\n\t\t\t\tDegree:"<<degree<<"\n\t\t\t\tId number:"<<id;
+}
+void doctor::dmodify()
+{
+ cout<<"\n\t\t\t\tEnter name of doctor:";
+ gets(name);
+ cout<<"\n\t\t\t\tEnter father's name of doctor:";
+ gets(fname);
+ cout<<"\n\t\t\t\tEnter degree of doctor:";
+ gets(degree);
+}
+int doctor::retid()
+{
+ return id;
+}
+void patient::pgetdata()
+{
+ cout<<"\n\t\t\t\tEnter name of patient:";
+ gets(pname);
+ cout<<"\n\t\t\t\tEnter problem of patient:";
+ gets(problem);
+ cout<<"\n\t\t\t\tEnter department:";
+ gets(dept);
+ cout<<"\n\t\t\t\tEnter phone number of patient:";
+ cin>>phno;
+ cout<<"\n\t\t\t\tEnter registration number:";
+ cin>>reg_no;
+}
+void patient::pdisplaydata()
+{
+ cout<<"\n\t\t\t\tName:"<<pname<<"\n\t\t\t\tProblem:"<<problem;
+ cout<<"\n\t\t\t\tDepartment:"<<dept<<"\n\t\t\t\tPhone number:"<<phno;
+ cout<<"\n\t\t\t\tRegistration Number:"<<reg_no;
+}
+void patient::pmodify()
+{
+ cout<<"\n\t\t\t\tEnter name of patient:";
+ gets(pname);
+ cout<<"\n\t\t\t\tEnter problem of patient:";
+ gets(problem);
+ cout<<"\n\t\t\t\tEnter department:";
+ gets(dept);
+ cout<<"\n\t\t\t\tEnter phone number:";
+ cin>>phno;
+}
+long int patient::retreg_no()
+{
+ return reg_no;
+}
+void options()
+{
+ cout<<"\n\n\t\t\t\tMain Menu\n\t\t\t\t1.Doctor Management";
+ cout<<"\n\t\t\t\t2.Patient Management";
+ cout<<"\n\t\t\t\t3.Bed Management\n\t\t\t\t4.Bill Generation";
+ cout<<"\n\t\t\t\t5.Exit";
+ cout<<"\n\n\t\t\t\tEnter your choice:";
+ cin>>temp;
+ suboptions();
+}
+void suboptions()
+{
+ char ch,s;
+ if(temp==1)
+ {
+  //clrscr();
+  int z;
+  char a='y';
+  while((a=='y')||(a=='Y'))
+  {
+   cout<<"\n\t\t\t\tDoctor Management\n\t\t\t\t*****************";
+   cout<<"\n\t\t\t\t1.Add a doctor\n\t\t\t\t2.Search a doctor";
+   cout<<"\n\t\t\t\t3.Modify\n\t\t\t\t4.Delete";
+   cout<<"\n\t\t\t\t5.Main Menu\n\t\t\t\t6.Exit";
+   cout<<"\n\t\t\t\tEnter your choice:";
+   cin>>z;
+   if(z==1)
+   {
+    //clrscr();
+    add();
+   }
+   else if(z==2)
+   {
+    //clrscr();
+    search();
+   }
+   else if(z==3)
+   {
+    //clrscr();
+    modify();
+   }
+   else if(z==4)
+   {
+    //clrscr();
+    Delete();
+   }
+   else if(z==5)
+   {
+    //clrscr();
+    options();
+    break;
+   }
+   else if(z==6)
+    exit(0);
+   else
+    cout<<"\n\t\t\t\tWrong choice entered";
+   cout<<"\n\t\t\t\tDo you want to reselect(y/Y):";
+   cin>>a;
+   //clrscr();
+  }
+ }
+ else if(temp==2)
+ {
+  //clrscr();
+  char b='y';
+  int y;
+  while((b=='y')||(b=='Y'))
+  {
+   cout<<"\n\t\t\t\tPatient Management\n\t\t\t\t1.Add a patient";
+   cout<<"\n\t\t\t\t2.Search a patient";
+   cout<<"\n\t\t\t\t3.Modify\n\t\t\t\t4.Delete";
+   cout<<"\n\t\t\t\t5.Count total patients";
+   cout<<"\n\t\t\t\t6.Main Menu\n\t\t\t\t7.Exit";
+   cout<<"\n\t\t\t\tEnter your choice:";
+   cin>>y;
+   if(y==1)
+   {
+    //clrscr();
+    add();
+   }
+   else if(y==2)
+   {
+    //clrscr();
+    search();
+   }
+   else if(y==3)
+   {
+    //clrscr();
+    modify();
+   }
+   else if(y==4)
+   {
+    //clrscr();
+    Delete();
+   }
+   else if(y==5)
+   {
+    //clrscr();
+    count();
+   }
+   else if(y==6)
+   {
+    //clrscr();
+    options();
+    break;
+   }
+   else if(y==7)
+    exit(0);
+   else
+    cout<<"\n\t\t\t\tWrong choice entered";
+   cout<<"\n\t\t\t\tDo you want to reselect(y/Y):";
+   cin>>b;
+   //clrscr();
+  }
+ }
+ else if(temp==3)
+ {
+  //clrscr();
+  int t,u;
+  char f='y';
+  while((f=='y')||(f=='Y'))
+  {
+   cout<<"\n\t\t\t\tBed Management\n\t\t\t\t1.Total beds";
+   cout<<"\n\t\t\t\t2.Add number of beds";
+   cout<<"\n\t\t\t\t3.Allocated beds\n\t\t\t\t4.Main menu";
+   cout<<"\n\t\t\t\t5.Exit";
+   cout<<"\n\t\t\t\tEnter your choice:";
+   cin>>t;
+   switch (t)
+   {
+    case 1://clrscr();
+     bedx();
+     break;
+    case 2://clrscr();
+     bedy();
+     break;
+    case 3://clrscr();
+     bedz();
+     break;
+    case 4://clrscr();
+     options();
+     u=1;
+     break;
+    case 5:exit(0);
+    default:
+     cout<<"\n\t\t\t\tWrong choice entered";
+   }
+   if(u!=1)
+   {
+    cout<<"\n\t\t\t\tDo you want to reselect(y/Y):";
+    cin>>f;
+    //clrscr();
+   }
+  }
+ }
+ else if(temp==4)
+ {
+  //clrscr();
+  fee();
+ }
+ else if(temp==5)
+ {
+  exit(0);
+ }
+ else
+ {
+  cout<<"\n\t\t\t\tWrong choice entered";
+  cout<<"\n\t\t\t\tDo you want to reselect main menu(y/Y):";
+  cin>>s;
+ }
+ if((s=='y')||(s=='Y'))
+ {
+  //clrscr();
+  options();
+ }
+ else
+  exit(0);
+}
+void add()
+{
+ if(temp==1)
+ {
+  char c='y';
+  ofstream dofile("doc.dat",ios::binary|ios::app);
+  while((c=='y')||(c=='Y'))
+  {
+   d.dgetdata();
+   dofile.write((char *)&d,sizeof(d));
+   cout<<"\n\t\t\t\t________________________________";
+   cout<<"\n\t\t\t\tDo you want to enter more(y/Y):";
+   cin>>c;
+   cout<<"\t\t\t\t________________________________";
+  }
+ dofile.close();
+ }
+ if(temp==2)
+ {
+  char c='y';
+  ofstream pofile("pat.dat",ios::binary|ios::app);
+  while((c=='y')||(c=='Y'))
+  {
+   p.pgetdata();
+   pofile.write((char *)&p,sizeof(p));
+   cout<<"\n\t\t\t\t_______________________________";
+   cout<<"\n\t\t\t\tDo you want to enter more(y/Y):";
+   cin>>c;
+   cout<<"\t\t\t\t_______________________________";
+  }
+  pofile.close();
+ }
+}
+void search()
+{
+ if(temp==1)
+ {
+  int x,flag=0;
+  cout<<"\n\t\t\t\tEnter the Id of doctor:";
+  cin>>x;
+  ifstream difile("doc.dat",ios::binary);
+  while(difile.read((char *)&d,sizeof(d)))
+  {
+   if(x==d.retid())
+   {
+    flag=1;
+    cout<<"\n\t\t\t\tDoctor found\n\n\t\t\t\tDetails are:-\n";
+    d.ddisplaydata();
+   }
+  }
+  if(flag==0)
+   cout<<"\n\t\t\t\tNo doctor found";
+  difile.close();
+ }
+ if(temp==2)
+ {
+  int x,flag=0;
+  cout<<"\n\t\t\t\tEnter registration number of patient:";
+  cin>>x;
+  ifstream pifile("pat.dat",ios::binary);
+  while(pifile.read((char *)&p,sizeof(p)))
+  {
+   if(x==p.retreg_no())
+   {
+    flag=1;
+    cout<<"\n\t\t\t\tPatient found\n\n\t\t\t\tDetails are:-";
+    p.pdisplaydata();
+   }
+  }
+  if(flag==0)
+   cout<<"\n\t\t\t\tNo patient found";
+  pifile.close();
+ }
+}
+void modify()
+{
+ if(temp==1)
+ {
+  long double k;
+  int w,flag=0;
+  cout<<"\n\t\t\t\tEnter Id of doctor:";
+  cin>>w;
+  fstream dfile("doc.dat",ios::binary|ios::in|ios::out);
+  while(dfile.read((char *)&d,sizeof(d)))
+  {
+   if(w==d.retid())
+   {
+    flag=1;
+    d.dmodify();
+    k=dfile.tellg();
+    k=k-sizeof(d);
+    dfile.seekp(k,ios::beg);
+    dfile.write((char *)&d,sizeof(d));
+   }
+  }
+  if(flag==1)
+   cout<<"\n\t\t\t\tRecord modified";
+  else
+   cout<<"\n\t\t\t\tNo doctor found";
+  dfile.close();
+ }
+ if(temp==2)
+ {
+  long double k,w;
+  int flag=0;
+  cout<<"\n\t\t\t\tEnter the registration number:";
+  cin>>w;
+  fstream pfile("pat.dat",ios::binary|ios::in|ios::out);
+  while(pfile.read((char *)&p,sizeof(p)))
+  {
+   if(w==p.retreg_no())
+   {
+    flag=1;
+    p.pmodify();
+    k=pfile.tellg();
+    k=k-sizeof(p);
+    pfile.seekp(k,ios::beg);
+    pfile.write((char *)&p,sizeof(p));
+   }
+  }
+  if(flag==1)
+   cout<<"\n\t\t\t\tRecord modified";
+  else
+   cout<<"\n\t\t\t\tNo patient found";
+  pfile.close();
+ }
+}
+void Delete()
+{
+ if(temp==1)
+ {
+  long double k;
+  int v,flag=0;
+  cout<<"\n\t\t\t\tEnter Id of doctor(to be deleted):";
+  cin>>v;
+  ifstream dile("doc.dat",ios::binary);
+  ofstream oile("atemp.dat",ios::binary);
+  while(dile.read((char *)&d,sizeof(d)))
+  {
+   if(d.retid()!=v)
+   {
+    flag=1;
+    oile.write((char *)&d,sizeof(d));
+   }
+  }
+  if(flag==1)
+   cout<<"\n\t\t\t\tRecord deleted";
+  else
+   cout<<"\n\t\t\t\tNo doctor found";
+  dile.close();
+  oile.close();
+  remove("doc.dat");
+  rename("atemp.dat","doc.dat");
+ }
+ if(temp==2)
+ {
+  long double k,w;
+  int flag=0;
+  cout<<"\n\t\t\t\tEnter the registration number:";
+  cin>>w;
+  ifstream pifile("pat.dat",ios::binary);
+  ofstream ofile("btemp.dat",ios::binary);
+  while(pifile.read((char *)&p,sizeof(p)))
+  {
+   if(w!=p.retreg_no())
+   {
+    flag=1;
+    ofile.write((char *)&p,sizeof(p));
+   }
+  }
+  if(flag==1)
+   cout<<"\n\t\t\t\tRecord deleted";
+  else
+   cout<<"\n\t\t\t\tNo patient found";
+  pifile.close();
+  ofile.close();
+  remove("pat.dat");
+  rename("btemp.dat","pat.dat");
+ }
+}
+void bedx()
+{
+ cout<<"\n\t\t\t\tTotal number of beds:200";
+}
+void bedy()
+{
+ int q,tot_bed=200;
+ cout<<"\n\t\t\t\tEnter number of beds:";
+ cin>>q;
+ tot_bed+=q;
+ cout<<"\n\t\t\t\tRecord updated";
+ cout<<"\n\t\t\t\tNew total number of beds:"<<tot_bed;
+}
+void bedz()
+{
+ int r=0;
+ ifstream pifile("pat.dat",ios::binary);
+ while(pifile.read((char *)&p,sizeof(p)))
+ {
+  r++;
+ }
+ cout<<"\n\t\t\t\tAllocated beds are:"<<r;
+ pifile.close();
+}
+void count()
+{
+ int c=0;
+ ifstream pifile("pat.dat",ios::binary);
+ while(pifile.read((char *)&p,sizeof(p)))
+ {
+  c++;
+ }
+ cout<<"\n\t\t\t\tTotal number of patients:";
+ cout<<c;
+}
+void fee()
+{
+ int k,l,flag=0;
+ char ch='y',ck;
+ while((ch=='y')||(ch=='Y'))
+ {
+  cout<<"\n\t\t\t\tEnter registration number of patient:";
+  cin>>k;
+  ifstream pifile("pat.dat",ios::binary);
+  while(pifile.read((char *)&p,sizeof(p)))
+  {
+   if(k==p.retreg_no())
+   {
+    flag=1;
+    cout<<"\n\t\t\t\tPatient found";
+   }
+  }
+  if(flag==1)
+  {
+   cout<<"\n\t\t\t\tEnter no. of days patient admitted:";
+   cin>>l;
+   cout<<"\n\t\t\t\tPer day cost:500";
+   cout<<"\n\t\t\t\tNumber of days:"<<l;
+   cout<<"\n\t\t\t\tTotal cost:"<<l*500;
+  }
+  else
+   cout<<"\n\t\t\t\tWrong registration number entered";
+  cout<<"\n\t\t\t\t____________________________";
+  cout<<"\n\t\t\t\tDo you want to renter(y/Y):";
+  cin>>ch;
+  cout<<"\t\t\t\t____________________________";
+ }
+ cout<<"\n\t\t\t\tDo you want to reslect from main menu(y/Y):";
+ cin>>ck;
+ if((ck=='y')||(ck=='Y'))
+ {
+  //clrscr();
+  options();
+ }
+ else
+  exit(0);
+}
+int main()
+{
+ //clrscr();
+ cout<<"\n\t\t*******************************************************";
+ cout<<"\n\t\t\t\tINFIRMARY MANAGEMENT";
+ cout<<"\n\t\t*******************************************************";
+ options();
+ getch();
+}
